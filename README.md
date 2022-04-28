@@ -4,7 +4,7 @@ How to start the HelloWorld application
 ---
 
 1. Run `mvn clean install` to build your application
-2. java -jar target/HelloWorld-1.0-SNAPSHOT.jar server hello-world.yml
+2. java -jar target/HelloWorld-1.0-SNAPSHOT.jar server config/dev.yml
 3. To check that your application is running enter url `http://localhost:8080`
 
 Health Check
