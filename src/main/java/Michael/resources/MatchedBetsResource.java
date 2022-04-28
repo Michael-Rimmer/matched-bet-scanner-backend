@@ -16,20 +16,16 @@ import Michael.core.Scraper;
 @Produces(MediaType.APPLICATION_JSON)
 public class MatchedBetsResource {
 
-    public MatchedBetsResource() {
-    }
+    private final String chromeDriverPath;
 
-//    @GET
-//    @Timed
-//    public Saying sayHello(@QueryParam("name") Optional<String> name) {
-//        final String value = String.format(template, name.orElse(defaultName));
-//        return new Saying(counter.incrementAndGet(), value);
-//    }
+    public MatchedBetsResource(String chromeDriverPath) {
+        this.chromeDriverPath = chromeDriverPath;
+    }
 
     @GET
     @Timed
     public ArrayList<MatchedBet> getMatchedBets() {
-        return Scraper.scrapeMatchedBets();
+        return Scraper.scrapeMatchedBets(chromeDriverPath);
     }
 
 }

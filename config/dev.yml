@@ -1,0 +1,3 @@
+template: Hello, %s!
+defaultName: Stranger
+chromeDriverPath: C:\\Users\\Michael Rimmer\\chromedriver\\chromedriver.exe

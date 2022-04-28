@@ -205,10 +205,11 @@ public class Scraper {
         return matchedBets;
     }
 
-    public static ArrayList<MatchedBet> scrapeMatchedBets() {
+    public static ArrayList<MatchedBet> scrapeMatchedBets(String chromeDriverPath) {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         WebDriver driver = new ChromeDriver(options);
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Michael Rimmer\\chromedriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 
         HashMap<String, FootballBet> backBets = scrapeWilliamHill(driver);
         HashMap<String, FootballBet> layBets = scrapeBetfair(driver);

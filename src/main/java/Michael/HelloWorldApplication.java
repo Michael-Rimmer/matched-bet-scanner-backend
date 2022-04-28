@@ -22,7 +22,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
     @Override
     public String getName() {
-        return "HelloWorld";
+        return "MatchedBetScanner";
     }
 
     @Override
@@ -33,13 +33,11 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void run(final HelloWorldConfiguration configuration, final Environment environment) {
 
-//        final Client client = new JerseyClientBuilder(environment).using(configuration.getJerseyClientConfiguration()).build(getName());
-
         // Enable CORS headers
         final FilterRegistration.Dynamic cors = environment.servlets().addFilter("CORS", CrossOriginFilter.class);
 
         // Configure CORS parameters
-        cors.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "http://localhost:3000");
+        cors.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "http://localhost:8080");
         cors.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
         cors.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "GET");
         cors.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, "X-Requested-With,Content-Type,Accept,Origin");
@@ -50,7 +48,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         final HelloWorldResource resource = new HelloWorldResource(configuration.getTemplate(),
                 configuration.getDefaultName());
 
-        final MatchedBetsResource matchedBetsResource = new MatchedBetsResource();
+        final MatchedBetsResource matchedBetsResource = new MatchedBetsResource(configuration.getChromeDriverPath());
 
         final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
 
@@ -58,7 +56,6 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
         environment.jersey().register(matchedBetsResource);
-//        environment.jersey().register(client);
 
     }
 
