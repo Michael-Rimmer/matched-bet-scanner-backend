@@ -1,3 +1,4 @@
 template: Hello, %s!
 defaultName: Stranger
 chromeDriverPath: /usr/bin/chromedriver
+corsAllowedOrigins: 'http://18.134.46.14,http://18.134.46.14:80,http://18.134.46.14:443'

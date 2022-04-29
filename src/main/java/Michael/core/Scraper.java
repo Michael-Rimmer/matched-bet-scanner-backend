@@ -30,11 +30,8 @@ public class Scraper {
         // find other competitions to scrape here -
         // https://sports.williamhill.com/betting/en-gb/football/competitions
         // driver.get("https://sports.williamhill.com/betting/en-gb/football/competitions/OB_TY338/Spanish-La-Liga-Primera/matches/OB_MGMB/Match-Betting");
-        // TODO optimise timeout
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
 
-        // TODO can I figure out the API call that the browser makes to get the data as
-        // JSON?
         List<WebElement> eventElements = driver.findElements(By.cssSelector(".sp-o-market.sp-o-market--default"));
 
         String dateString = "";
@@ -126,10 +123,6 @@ public class Scraper {
                         continue;
                     }
 
-                    System.out.println("---");
-                    System.out.println(event.getText());
-                    System.out.println("---");
-
                     String[] eventElementText = eventText.split("\\n");
 
                     if (eventElementText[0].contains("'")) {
@@ -199,6 +192,8 @@ public class Scraper {
             FootballBet layBet = layBets.getOrDefault(key, null);
             if (layBet != null) {
                 matchedBets.add(new MatchedBet(backBets.get(key), layBet));
+            } else {
+                System.out.println(String.format("No lay bet exists that matches the back bet with key: %s", key));
             }
         }
 
@@ -235,8 +230,6 @@ public class Scraper {
         String[] dateStringSplit = dateString.split(" ");
         Integer day = Integer.parseInt(dateStringSplit[1]);
         String month = dateStringSplit[2];
-
-        System.out.println(dateStringSplit.toString());
 
         return String.format("%02d %s", day, month);
     }

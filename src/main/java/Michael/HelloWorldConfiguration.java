@@ -20,6 +20,9 @@ public class HelloWorldConfiguration extends Configuration {
     @NotEmpty
     private String chromeDriverPath;
 
+    @NotEmpty
+    private String corsAllowedOrigins;
+
     @JsonProperty
     public String getTemplate() {
         return template;
@@ -48,6 +51,16 @@ public class HelloWorldConfiguration extends Configuration {
     @JsonProperty
     public void setChromeDriverPath(String path) {
         this.chromeDriverPath = path;
+    }
+
+    public String getCorsAllowedOrigins() {
+        // TODO Auto-generated method stub
+        return corsAllowedOrigins;
+    }
+
+    @JsonProperty
+    public void setCorsAllowedOrigins(String origins) {
+        this.corsAllowedOrigins = origins;
     }
 
 }
