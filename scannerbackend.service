@@ -1,0 +1,14 @@
+[Unit]
+Description=Run Matched Bets Scanner Backend
+
+[Service]
+WorkingDirectory=/opt/prod
+ExecStart=/bin/java -Xms128m -Xmx245m -jar HelloWorld-1.0-SNAPSHOT.jar server prod.yml
+User=scannerbackend
+Group=scannerbackendgroup
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
